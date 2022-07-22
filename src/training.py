@@ -1,31 +1,40 @@
 import os
 from utils.common import read_config
 from utils.data_mgmt import get_data
-#from src.utils.model import create_model, save_model
+from utils.model import create_model
 #from src.utils.callbacks import get_callbacks
 import argparse
 
+""""
+I'm not sure but this same framework can be used to write modular code for any modeling problem
+"""
+
 def training(config_path):
-    #Read our config paramter
+    """
+    Read our config paramter. It a good idea to pass it (config) in the training function because this is where we will be training our model
+    Thus many parameter need to be called in this function
+    """
     config = read_config(config_path)
     
     validation_datasize = config["params"]["validation_datasize"] # Here we just saying. inside param, get the validation_datasize and pass it to get_data function
     (X_train, y_train), (X_valid, y_valid), (X_test, y_test) = get_data(validation_datasize) 
-    # LOSS_FUNCTION = config["params"]["loss_function"]
-    # OPTIMIZER = config["params"]["optimizer"]
-    # METRICS = config["params"]["metrics"]
-    # NUM_CLASSES = config["params"]["num_classes"]
 
-    # model = create_model(LOSS_FUNCTION, OPTIMIZER, METRICS, NUM_CLASSES)
+    #Initiate yaml file which will be passed on our create model function
+    LOSS_FUNCTION = config["params"]["loss_function"]
+    OPTIMIZER = config["params"]["optimizer"]
+    METRICS = config["params"]["metrics"]
+    NUM_CLASSES = config["params"]["num_classes"]
 
-    # EPOCHS = config["params"]["epochs"]
-    # VALIDATION_SET = (X_valid, y_valid)
+    model = create_model(LOSS_FUNCTION, OPTIMIZER, METRICS, NUM_CLASSES)
+
+    EPOCHS = config["params"]["epochs"]
+    VALIDATION_SET = (X_valid, y_valid)
 
     # # create callbacks
     # CALLBACK_LIST = get_callbacks(config, X_train)
 
-    # history = model.fit(X_train, y_train, epochs=EPOCHS,
-    #                 validation_data=VALIDATION_SET, callbacks=CALLBACK_LIST)
+    history = model.fit(X_train, y_train, epochs=EPOCHS,
+                    validation_data=VALIDATION_SET)
 
     # artifacts_dir = config["artifacts"]["artifacts_dir"]
     # model_dir = config["artifacts"]["model_dir"]
