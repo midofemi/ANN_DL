@@ -1,7 +1,11 @@
+"""
+Training.py is essential. This file will be pointing to all the other functions
+"""
+
 import os
 from utils.common import read_config
 from utils.data_mgmt import get_data
-from utils.model import create_model, save_model
+from utils.model import create_model, save_model, save_plot
 #from src.utils.callbacks import get_callbacks
 import argparse
 
@@ -42,15 +46,23 @@ def training(config_path):
     """
     artifacts_dir = config["artifacts"]["artifacts_dir"]
     model_dir = config["artifacts"]["model_dir"]
+    plots_dir = config["artifacts"]["plots_dir"]
+    plot_name = config["artifacts"]["plot_name"]
     
     model_dir_path = os.path.join(artifacts_dir, model_dir)
     os.makedirs(model_dir_path, exist_ok=True)
     # _____________________________________________________________________________________________________________
     
     model_name = config["artifacts"]["model_name"]
-    
+
+
+    plot_dir_path = os.path.join(artifacts_dir, plots_dir)
+    os.makedirs(plot_dir_path, exist_ok=True)
+
     #Save Model in H5: H5 is just how we save deep learning model
     save_model(model, model_name, model_dir_path)
+
+    save_plot(history, plot_name, plot_dir_path)
 
 if __name__ == '__main__':
     #################### THIS JUST HELPS US TO USED THOSE PARAMETERS IN THE YAML FILE #################################
