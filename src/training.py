@@ -6,7 +6,7 @@ import os
 from utils.common import read_config
 from utils.data_mgmt import get_data
 from utils.model import create_model, save_model, save_plot
-#from src.utils.callbacks import get_callbacks
+from utils.callbacks import get_callbacks
 import argparse
 
 """"
@@ -35,10 +35,12 @@ def training(config_path):
     VALIDATION_SET = (X_valid, y_valid)
 
     # # create callbacks
-    # CALLBACK_LIST = get_callbacks(config, X_train)
+    # create callbacks
+    CALLBACK_LIST = get_callbacks(config, X_train)
 
     history = model.fit(X_train, y_train, epochs=EPOCHS,
-                    validation_data=VALIDATION_SET)
+                    validation_data=VALIDATION_SET, callbacks=CALLBACK_LIST)
+
     # _____________________________________________________________________________________________________________
     """
     #Note: The artifacts\model folder was not created by me. It was automatically created when I ran the script and also
