@@ -1,3 +1,5 @@
+Artificial neural networks (ANNs) are computer systems that are modelled after the biological neural networks that make up animal brains. It processes data and creates patterns for use in decision-making in the same way that the human brain does
+
 # ANN_DL
 Multi Layer Implementation of Artificial Neural Network
 
