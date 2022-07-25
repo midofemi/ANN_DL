@@ -1,6 +1,6 @@
 #Inside these parameters are just dictionaries
 
-param:
+param1:
   test: This is a test
 
 
@@ -21,7 +21,7 @@ logs:
 
 
 params:
-  epochs: 3
+  epochs: 30
   batch_size: 32
   num_classes: 10
   loss_function: sparse_categorical_crossentropy
