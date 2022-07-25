@@ -8,3 +8,9 @@ matplotlib
 seaborn
 numpy
 pandas
+
+## TO execute this code
+- python src/training.py
+
+## To Run TensorBoard
+tensorboard -- logdir logs_dir/tensorboard_logs/
